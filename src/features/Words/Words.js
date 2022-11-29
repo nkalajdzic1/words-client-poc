@@ -7,14 +7,31 @@ import { useEffect, useState } from "react";
 import { useWords } from "./useWords";
 
 const ButtonWrapper = styled.div`
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+`;
+
+const Container = styled.div`
+  min-width: 50px;
+  display: grid;
+  place-content: center;
+`;
+
+const List = styled.ul`
+  margin-block: 5%;
+  padding: 0;
+  width: clamp(300px, 60%, 900px);
 `;
 
 const ListItem = styled.li`
   list-style: none;
+`;
+
+const H4 = styled.h4`
+  border-bottom: 1px solid white;
+  padding-bottom: 5px;
 `;
 
 const HomePage = () => {
@@ -28,6 +45,9 @@ const HomePage = () => {
     pageNumber,
     pageSize,
   });
+
+  const prevPage = () => setPageNumber((prevState) => prevState - 1);
+  const nextPage = () => setPageNumber((prevState) => prevState + 1);
 
   useEffect(() => {
     const searchTimeout = setTimeout(() => {
@@ -44,31 +64,29 @@ const HomePage = () => {
         placeholder="Search..."
         onChange={(e) => setSearchVal(e.target.value)}
       />
+      <ButtonWrapper>
+        <Container>
+          {pageNumber > 1 && <Button onClick={prevPage}>Prev</Button>}
+        </Container>
+        <Container>{pageNumber}</Container>
+        <Container>
+          {pageNumber * pageSize < words?.total && (
+            <Button onClick={nextPage}>Next</Button>
+          )}
+        </Container>
+      </ButtonWrapper>
       {isLoadingWords ? (
         <h4>Loading...</h4>
       ) : (
-        <ul>
+        <List>
           {words?.list.map((x, i) => (
             <ListItem key={`word-${x.id}-${i}`}>
-              <h4>{x.word}</h4>
+              <H4>{x.word}</H4>
               <i>{x.definition}</i>
             </ListItem>
           ))}
-        </ul>
+        </List>
       )}
-      <ButtonWrapper>
-        {pageNumber > 1 && (
-          <Button onClick={() => setPageNumber((prevState) => prevState - 1)}>
-            Prev
-          </Button>
-        )}
-        <div>{pageNumber}</div>
-        {pageNumber * pageSize < words?.total && (
-          <Button onClick={() => setPageNumber((prevState) => prevState + 1)}>
-            Next
-          </Button>
-        )}
-      </ButtonWrapper>
     </Layout>
   );
 };

@@ -6,6 +6,7 @@ const Component = styled.button`
   background-color: transparent;
   border: 2px solid white;
   outline: none;
+  cursor: pointer;
 `;
 
 export const Button = ({ children, ...rest }) => {

@@ -4,10 +4,10 @@ import { QUERY_KEYS } from "lib/constants";
 import { createQueryFromObj } from "lib/utils";
 
 /**
- * @description
- * @param {*} params
- * @param {*} config
- * @returns
+ * @description hook that retrieves the list of words from the api
+ * @param {Object} params object containing the query http params (for instance: { pageNumber: 1, pageSize: 10 })
+ * @param {Object} config custom configuration object for the react query useQuery hook
+ * @returns {Object} result of the useQuery hook after calling the api
  */
 export const useWords = (params, config) => {
   return useQuery(

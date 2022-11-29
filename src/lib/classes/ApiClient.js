@@ -1,5 +1,8 @@
 import axios from "axios";
 
+/**
+ * @description axios wrapper class to configure the url, headers and etc.
+ */
 export class ApiClient {
   #instance = null;
 
