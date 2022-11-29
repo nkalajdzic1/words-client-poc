@@ -2,12 +2,12 @@ import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
 /* don't lazy load the loading page, it will be needed immediately as a fallback for the rest of the pages */
-import { LoadingPage } from "pages";
+import { LoadingPage } from "lib/components";
 import { ROUTE_PATHS } from "lib/constants";
 
-const HomePage = lazy(() => import("pages/HomePage"));
-const AboutPage = lazy(() => import("pages/AboutPage"));
-const Page404 = lazy(() => import("pages/Page404"));
+const HomePage = lazy(() => import("features/Words/Words"));
+const AboutPage = lazy(() => import("features/AboutPage/AboutPage"));
+const Page404 = lazy(() => import("lib/components/Page404"));
 
 const ROUTES = {
   HOME: {

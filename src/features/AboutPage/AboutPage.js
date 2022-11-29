@@ -1,6 +1,6 @@
 import { Layout } from "lib/components";
 
-export const AboutPage = () => {
+const AboutPage = () => {
   return <Layout>About Page</Layout>;
 };
 
